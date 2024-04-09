@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wings Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .custom-butto {
+        cursor:pointer;
+        border: none;
+        background: none;
+        padding: 0;
+    }
+</style>
+<body>
+
+    
+    <div id="game">
+        <header> Wings Clicker</header>
+        <main>
+            <div class="right">
+                <h2><span id="wings-number">  </span>Wings</h2>
+                <span id="count"></span> <-how many times did you press the wing
+                <span id="wings-number-second"></span> Time:
+                <div id="updates"></div>
+                    
+                    </div>
+                
+            </div>
+            <div class="left">
+                <button id="button">
+                    <img src="228882.png" alt="Click me!" >
+                </button>
+    
+
+
+            </div>
+        </main>
+
+    </div>
+
+<script scr="game.js"> 
+  var countDisplay = document.getElementById('count')  
+  var button = document.getElementById('button')
+  var count = 0
+
+  button.addEventListener('click' ,function() {
+    count++;
+    countDisplay.textContent = count;
+  });
+   
+        
+        
+
+</script>
+    
+</body>
+</html>
