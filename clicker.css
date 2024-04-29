@@ -4,7 +4,8 @@ body {
   }
   
   .container {
-    max-width: 600px;
+    background-image: url("wingyclicker.png");
+    max-width: 1000px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -24,4 +25,8 @@ body {
   
   button:hover {
     background-color: #0056b3;
+  }
+
+  body {
+
   }
