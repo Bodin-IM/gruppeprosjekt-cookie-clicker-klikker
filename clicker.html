@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clicker Game</title>
-  <link rel="stylesheet" href="clicker.css">
   <style>
     .custom-button {
       cursor: pointer;
@@ -48,26 +47,25 @@
     var countDisplay = document.getElementById('score'); 
     var image = document.querySelector('.clickable-image'); 
     var count = 0;
-    var upgradeCost = 10;   
+    var upgradeCost = 10;
+    var pointsPerSecond = 0; 
     var elapsedTime = 0; 
     var timerInterval; 
 
-    
     image.addEventListener('click', function() {
       count++;
       countDisplay.textContent = count;
     });
 
-    
     function updateTimer() {
       elapsedTime++;
       document.getElementById('timeElapsed').textContent = elapsedTime + ' seconds';
+      count += pointsPerSecond; 
+      countDisplay.textContent = count;
     }
 
-    
     timerInterval = setInterval(updateTimer, 1000);
 
-    
     var upgradeButton = document.getElementById('upgradeButton');
     upgradeButton.addEventListener('click', function() {
       if (count >= upgradeCost) {
@@ -75,6 +73,7 @@
         countDisplay.textContent = count;
         upgradeCost *= 2; 
         document.getElementById('upgradeCost').textContent = upgradeCost;
+        pointsPerSecond ++; 
       } else {
         alert('Not enough points to upgrade your mouse!');
       }

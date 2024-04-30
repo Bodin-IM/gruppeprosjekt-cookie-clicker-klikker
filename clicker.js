@@ -43,4 +43,4 @@ function updateTime() {
   timeElapsedDisplay.textContent = timeElapsed;
 }
 
-setInterval(updateTime, 1000); // Update time every second
+setInterval(updateTime, 1000); 
