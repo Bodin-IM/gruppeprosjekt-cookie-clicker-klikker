@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chicken nugget clicker</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url('chicken-clicker-1.png'); /* Replace 'background-image.jpg' with your image file path */
-            background-size: cover;
-            background-position: center;
-            height: 100vh; /* This ensures that the background covers the entire viewport height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white; /* Color for text on top of the background */
-            font-family: Arial, sans-serif; /* Font family for text */
-        }
-
-        /* Additional styling for content */
-        .content {
-            text-align: center;
-        }
-    </style>
-</head>     
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicken nugget Clicker</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #cookie {
+        width: 200px;
+        height: 200px;
+        background-image: url('chicken nugget.jpeg');
+        background-size: cover; 
+        background-repeat: no-repeat;
+        cursor: pointer;
+        
+    }
+    #counter {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+    #upgrade {
+        margin-top: 20px;
+    }
+</style>
+</head>
 <body>
-    <h1>chicken nugget </h1>
-    <div class="content">
-        <h1></h1>
-        <p>Click the nugget</p>
-    </div>
+<h1>Chicken nugget Clicker</h1>
+<div id="cookie"></div>
+<div id="counter">0 cookies</div>
+<button id="upgrade" onclick="buyUpgrade()">Buy Upgrade (Cost: 10 cookies)</button>
+
+<script>
+    let cookieCount = 0;
+    let upgradeCost = 10;
+
+    function clickCookie() {
+        cookieCount++;
+        document.getElementById("counter").innerText = cookieCount + " cookies";
+    }
+
+    function buyUpgrade() {
+        if (cookieCount >= upgradeCost) {
+            cookieCount -= upgradeCost;
+            upgradeCost *= 2;
+            document.getElementById("counter").innerText = cookieCount + " cookies";
+            document.getElementById("upgrade").innerText = "Buy Upgrade (Cost: " + upgradeCost + " cookies)";
+        } else {
+            alert("You don't have enough cookies to buy the upgrade!");
+        }
+    }
+
+    document.getElementById("cookie").addEventListener("click", clickCookie);
+</script>
 </body>
 </html>

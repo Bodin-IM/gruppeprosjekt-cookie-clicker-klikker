@@ -1,0 +1,12 @@
+#cookie {
+    width: 200px;
+    height: 200px;
+    background-image: url('backorund2chick.jpeg');
+    background-size: cover;
+    cursor: pointer;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+}
