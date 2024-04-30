@@ -1,14 +1,14 @@
-let cookieCount = 0;
-
-function clickCookie() {
-    cookieCount++;
-    document.getElementById('nuggetCount').innerText = cookieCount + ' nuggets';
+let nuggetCount = 0;
+ 
+function clicknugget() {
+nuggetCount++;
+document.getElementById('nuggetCount').innerText = nuggetCount + ' nuggets';
 }
 
 function buyUpgrade(cost) {
-    if (cookieCount >= cost) {
-        cookieCount -= cost;
-        document.getElementById('nuggetCount').innerText = cookieCount + ' nuggets';
+    if (nuggetCount >= cost) {
+        nuggetCount -= cost;
+        document.getElementById('nuggetCount').innerText = nuggetCount + ' nuggets';
         // Perform upgrade action here, for example:
         console.log('Upgrade purchased!');
     } else {
@@ -18,5 +18,5 @@ function buyUpgrade(cost) {
 
 // Auto-clicker example (runs every second)
 setInterval(function() {
-    clickCookie();
+    clicknugget();
 }, 1000);

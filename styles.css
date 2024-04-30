@@ -1,7 +1,7 @@
-#cookie {
+#nugget {
     width: 200px;
     height: 200px;
-    background-image: url('backorund2chick.jpeg');
+    background-image: url('');
     background-size: cover;
     cursor: pointer;
 }
@@ -9,4 +9,9 @@
 button {
     margin: 5px;
     padding: 10px;
+}
+
+#store{
+    display: flex;
+    flex-direction: column;
 }
