@@ -3,57 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chicken nugget Clicker</title>
+<title>Cookie Clicker</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         text-align: center;
+        background-image: url('chicken_clicker-1.png');
+        background-size: cover; 
+        margin: 0;
+        padding: 0;
     }
     #cookie {
         width: 200px;
         height: 200px;
-        background-image: url('chicken nugget.jpeg');
-        background-size: cover; 
+        background-image: url('chickennugget.png');
+        background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        
+        margin-top: 50px;
+        transition: transform 0.1s;
     }
-    #counter {
+    h1{
+    border-style: dashed;
+}
+    #cookie:hover {
+        transform: scale(1.1);
+    }
+    #score {
         font-size: 24px;
         margin-top: 20px;
     }
-    #upgrade {
-        margin-top: 20px;
+
+    .settings {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 3px solid black;
+        border-radius: 45px;
+        p{
+            border-bottom: 3px solid black;
+            border-top: 3px solid black;
+            border-left: 3px dotted;
+            border-right: 3px dotted black;
+
+            border-radius: 20px;
+            
+
+            
+        }   
+    
+}
+    
+    .upgrade {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 10px;
     }
-</style>
+    .upgrade:hover {
+        background-color: #45a049;
+    }
+    #stats {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+    </style>
 </head>
 <body>
-<h1>Chicken nugget Clicker</h1>
-<div id="cookie"></div>
-<div id="counter">0 cookies</div>
-<button id="upgrade" onclick="buyUpgrade()">Buy Upgrade (Cost: 10 cookies)</button>
+    
+    
+    <div id="cookie" onclick="increaseScore()"></div>
+    <div class="settings">
+        <div id="score">Cookies: <span id="scoreValue">0</span></div>
+        <div id="upgrades">
+            <button class="upgrade" onclick="buyUpgrade(1)">Upgrade Click</button>
+            <button class="upgrade" onclick="buyUpgrade(2)">Auto Clicker</button>
+        </div>
+        <div id="stats">
+            <p>Clicks: <span id="clicks">0</span></p>
+        <p>Auto Clickers: <span id="autoClickers">0</span></p>
+    </div>
+    <button class="upgrade" onclick="resetGame()">Reset Game</button>
+</div>
 
 <script>
-    let cookieCount = 0;
-    let upgradeCost = 10;
-
-    function clickCookie() {
-        cookieCount++;
-        document.getElementById("counter").innerText = cookieCount + " cookies";
+    var score = 0;
+    var clicks = 0;
+    var autoClickers = 0;
+    var clickMultiplier = 1;
+    var autoClickerInterval;
+    
+    function increaseScore() {
+        score += clickMultiplier;
+        clicks++;
+        document.getElementById('scoreValue').innerText = score;
+        document.getElementById('clicks').innerText = clicks;
     }
-
-    function buyUpgrade() {
-        if (cookieCount >= upgradeCost) {
-            cookieCount -= upgradeCost;
-            upgradeCost *= 2;
-            document.getElementById("counter").innerText = cookieCount + " cookies";
-            document.getElementById("upgrade").innerText = "Buy Upgrade (Cost: " + upgradeCost + " cookies)";
-        } else {
-            alert("You don't have enough cookies to buy the upgrade!");
+    
+    function buyUpgrade(type) {
+        if (type === 1 && score >= 10) {
+            clickMultiplier *= 2;
+            score -= 10;
+            document.getElementById('scoreValue').innerText = score;
+        } else if (type === 2 && score >= 50) {
+            autoClickers++;
+            score -= 50;
+            document.getElementById('scoreValue').innerText = score;
+            document.getElementById('autoClickers').innerText = autoClickers;
+            if (autoClickerInterval === undefined) {
+                autoClickerInterval = setInterval(autoClick, 1000);
+            }
         }
     }
 
-    document.getElementById("cookie").addEventListener("click", clickCookie);
+    function autoClick() {
+        score += autoClickers * clickMultiplier;
+        document.getElementById('scoreValue').innerText = score;
+    }
+
+    function saveGame() {
+        localStorage.setItem('nuggetclickersave', JSON.stringify({ score, clicks, autoClickers }));
+    }
+
+    function loadGame() {
+        var saveData = JSON.parse(localStorage.getItem('nuggetclickersave'));
+        if (saveData !== null) {
+            score = saveData.score;
+            clicks = saveData.clicks;
+            autoClickers = saveData.autoClickers;
+            document.getElementById('scoreValue').innerText = score;
+            document.getElementById('clicks').innerText = clicks;
+            document.getElementById('autoClickers').innerText = autoClickers;
+            if (autoClickers > 0 && autoClickerInterval === undefined) {
+                autoClickerInterval = setInterval(autoClick, 1000);
+            }
+        }
+    }
+
+    function resetGame() {
+        localStorage.removeItem('nuggetclickersave');
+        score = 0;
+        clicks = 0;
+        autoClickers = 0;
+        clickMultiplier = 1;
+        clearInterval(autoClickerInterval);
+        autoClickerInterval = undefined;
+        document.getElementById('scoreValue').innerText = score;
+        document.getElementById('clicks').innerText = clicks;
+        document.getElementById('autoClickers').innerText = autoClickers;
+    }
+
+    window.onload = loadGame;
+    window.onunload = saveGame;
 </script>
+
+
 </body>
 </html>
