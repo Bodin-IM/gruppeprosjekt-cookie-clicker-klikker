@@ -29,15 +29,17 @@
     <h1>Clicker Game</h1>
     <div>
       <div class="left">
-        <button class="custom-button" id="button">Click me!</button>
+      
       </div>
       
       <img src="chickenwingss.jpg" alt="img" class="clickable-image" width="200" height="200"> 
      
       
       <p>Score: <span id="score">0</span></p>
-      <p>Upgrade your mouse for <span id="upgradeCost">10</span> points</p>
-      <button id="upgradeButton">Upgrade Mouse</button>
+      <p>Upgrade your point per second<span id="upgradeCost">10</span> points</p>
+      <p>Upgrade your Cursor <span id="upgradeCursorCost">10</span> points</p>
+      <button id="upgradeCursor"> Upgrade cursor</button>
+      <button id="upgradeButton">Upgrade point per second (+1)</button>
     </div>
     <div>
       <p>Time Elapsed: <span id="timeElapsed">0</span> seconds</p>
@@ -48,6 +50,8 @@
     var image = document.querySelector('.clickable-image'); 
     var count = 0;
     var upgradeCost = 10;
+    var upgradeCursorCost = 10;
+    var upgradeButtonClickCost = 10; 
     var pointsPerSecond = 0; 
     var elapsedTime = 0; 
     var timerInterval; 
@@ -68,14 +72,28 @@
 
     var upgradeButton = document.getElementById('upgradeButton');
     upgradeButton.addEventListener('click', function() {
-      if (count >= upgradeCost) {
-        count -= upgradeCost; 
+      if (count >= upgradeButtonClickCost) {
+        count -= upgradeButtonClickCost; 
         countDisplay.textContent = count;
-        upgradeCost *= 2; 
-        document.getElementById('upgradeCost').textContent = upgradeCost;
-        pointsPerSecond ++; 
+        upgradeButtonClickCost *= 1.5; 
+        upgradeButtonClickCost = Math.round(upgradeButtonClickCost)
+        document.getElementById('upgradeCost').textContent = upgradeButtonClickCost;
+        pointsPerSecond ++;   
       } else {
-        alert('Not enough points to upgrade your mouse!');
+        alert('Not enough points to upgrade your point per second!');
+      }
+    });
+
+    var upgradeCursorButton = document.getElementById('upgradeCursor');
+    upgradeCursorButton.addEventListener('click', function() {
+      if (count >= upgradeCursorCost) {
+        count -= upgradeCursorCost; 
+        countDisplay.textContent = count;
+        upgradeCursorCost *= 2; 
+        document.getElementById('upgradeCost').textContent = upgradeCursorCost;
+        pointsPerClick += 1; 
+      } else {
+        alert('Not enough points to upgrade your cursor!');
       }
     });
   </script>
