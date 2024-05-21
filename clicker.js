@@ -1,4 +1,4 @@
-let score = 0;
+let score = 5;
 let upgradeCost = 10;
 let clickValue = 1;
 let timeElapsed = 0;
